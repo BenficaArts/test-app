@@ -39,4 +39,4 @@ with st.form("form_contato"):
         st.success("Mensagem enviada com sucesso! Obrigado por entrar em contato.")
 
 st.markdown("---")
-st.caption("©
+st.caption("© Kipper • Portfólio construído com Streamlit")
