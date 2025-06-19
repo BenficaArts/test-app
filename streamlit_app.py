@@ -3,32 +3,39 @@ import streamlit as st
 # Configuração da página
 st.set_page_config(page_title="Portfólio Kipper", layout="wide")
 
+# Foto principal
+st.image(
+    "https://ccbj.org.br/wp-content/uploads/2024/05/03.05.2024-Montilla-Coca-Cola-flavia-almeida-8-1024x683.jpg",
+    use_column_width=True,
+    caption="Kipper em performance — Foto: Flavia Almeida / CCBJ"
+)
+
 # Cabeçalho
 st.title("🎭 Portfólio de Kipper")
 st.markdown("Ator. Criador. Intérprete. Esta é a trajetória artística de Kipper contada através de sua obra.")
 
-# Seção: Trajetória
+# Trajetória
 st.header("🌟 Trajetória")
 st.write("""
-Kipper iniciou sua carreira nas artes cênicas ainda jovem, explorando o teatro de rua e a performance urbana. 
-Ao longo dos anos, seu trabalho evoluiu para incluir vídeo arte, fotografia conceitual e colaborações interdisciplinares.
+Kipper é um artista cearense que iniciou sua jornada nos espaços públicos e nas linguagens experimentais. 
+Seus trabalhos cruzam teatro, dança, performance e audiovisual, abordando temas sociais, identitários e afetivos com força poética.
 """)
 
-# Seção: Fotos do trabalho
+# Galeria de fotos
 st.header("🖼️ Galeria de Fotos")
 imagens = [
-    "https://link-de-alguma-foto.jpg",
-    "https://outra-foto.jpg"
+    "https://link1-da-galeria.jpg",
+    "https://link2-da-galeria.jpg"
 ]
 for img in imagens:
     st.image(img, use_column_width=True)
 
-# Seção: Vídeos
+# Vídeos do YouTube
 st.header("🎥 Obras em Vídeo")
-st.video("https://www.youtube.com/watch?v=link_do_video1")
-st.video("https://www.youtube.com/watch?v=link_do_video2")
+st.video("https://www.youtube.com/watch?v=video_id1")
+st.video("https://www.youtube.com/watch?v=video_id2")
 
-# Seção: Contato
+# Contato
 st.header("📬 Contato")
 with st.form("form_contato"):
     nome = st.text_input("Seu nome")
@@ -39,4 +46,4 @@ with st.form("form_contato"):
         st.success("Mensagem enviada com sucesso! Obrigado por entrar em contato.")
 
 st.markdown("---")
-st.caption("© Kipper • Portfólio construído com Streamlit")
+st.caption("© Kipper • Portfólio criado com Streamlit")
