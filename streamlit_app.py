@@ -1,27 +1,22 @@
 import streamlit as st
-from streamlit_option_menu import option_menu
 
 # Configuração da página
 st.set_page_config(layout="wide", page_title="Painel Admin", page_icon="🛠️")
 
-# Banco de dados simulado em memória
+# Banco de dados simulado (lista estática)
 produtos = ["Fone de ouvido", "Camiseta Azul", "Café Especial"]
 
-# Menu lateral
-with st.sidebar:
-    menu = option_menu(
-        "Painel WordPress",
-        ["Dashboard", "Criar Produto", "Consultar Produto", "Editar Produto", "Excluir Produto"],
-        icons=["speedometer", "plus-square", "search", "pencil-square", "trash"],
-        menu_icon="wordpress",
-        default_index=0
-    )
+# Menu lateral nativo
+menu = st.sidebar.radio(
+    "📋 Menu",
+    ("Dashboard", "Criar Produto", "Consultar Produto", "Editar Produto", "Excluir Produto")
+)
 
 st.title(f"🛠️ {menu}")
 
-# CRUD Condensado
+# CRUD
 if menu == "Dashboard":
-    st.info("Bem-vindo ao Painel Administrativo.\nUse o menu à esquerda para gerenciar seus produtos.")
+    st.info("Bem-vindo! Use o menu à esquerda para gerenciar os produtos.")
 
 elif menu == "Criar Produto":
     st.subheader("📦 Criar Novo Produto")
@@ -60,7 +55,5 @@ elif menu == "Excluir Produto":
     if excluir:
         st.error(f"Produto '{produto}' removido com sucesso!")
 
-# Rodapé
 st.markdown("---")
-st.caption("🎛️ Painel em Streamlit • Estilo WordPress")
-
+st.caption("🎛️ Painel em Streamlit • Simples e direto, sem bibliotecas externas")
