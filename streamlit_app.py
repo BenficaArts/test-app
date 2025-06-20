@@ -1,49 +1,59 @@
 import streamlit as st
 
-# Configuração da página
-st.set_page_config(page_title="Portfólio Kipper", layout="wide")
+st.set_page_config(layout="wide", page_title="Menu Colapsável", page_icon="📁")
 
-# Foto principal
-st.image(
-    "https://ccbj.org.br/wp-content/uploads/2024/05/03.05.2024-Montilla-Coca-Cola-flavia-almeida-8-1024x683.jpg",
-    use_column_width=True,
-    caption="Kipper em performance — Foto: Flavia Almeida / CCBJ"
-)
+st.sidebar.title("📋 Menu")
 
-# Cabeçalho
-st.title("🎭 Portfólio de Kipper")
-st.markdown("Ator. Criador. Intérprete. Esta é a trajetória artística de Kipper contada através de sua obra.")
+# Menu colapsável com expander
+with st.sidebar.expander("📦 Produtos"):
+    pagina = st.radio("Selecione a ação:", [
+        "Dashboard",
+        "Criar Produto",
+        "Consultar Produto",
+        "Editar Produto",
+        "Excluir Produto"
+    ])
 
-# Trajetória
-st.header("🌟 Trajetória")
-st.write("""
-Kipper é um artista cearense que iniciou sua jornada nos espaços públicos e nas linguagens experimentais. 
-Seus trabalhos cruzam teatro, dança, performance e audiovisual, abordando temas sociais, identitários e afetivos com força poética.
-""")
+st.title(f"🛠️ {pagina}")
 
-# Galeria de fotos
-st.header("🖼️ Galeria de Fotos")
-imagens = [
-    "https://link1-da-galeria.jpg",
-    "https://link2-da-galeria.jpg"
-]
-for img in imagens:
-    st.image(img, use_column_width=True)
+# Banco simulado
+produtos = ["Notebook Gamer", "Camisa Social", "Chá Verde"]
 
-# Vídeos do YouTube
-st.header("🎥 Obras em Vídeo")
-st.video("https://www.youtube.com/watch?v=video_id1")
-st.video("https://www.youtube.com/watch?v=video_id2")
+# Seções de conteúdo
+if pagina == "Dashboard":
+    st.info("Painel geral com visão rápida do sistema.")
 
-# Contato
-st.header("📬 Contato")
-with st.form("form_contato"):
-    nome = st.text_input("Seu nome")
-    email = st.text_input("Seu e-mail")
-    mensagem = st.text_area("Mensagem para Kipper")
-    enviar = st.form_submit_button("Enviar")
-    if enviar:
-        st.success("Mensagem enviada com sucesso! Obrigado por entrar em contato.")
+elif pagina == "Criar Produto":
+    with st.form("criar_produto"):
+        nome = st.text_input("Nome do Produto")
+        preco = st.number_input("Preço (R$)", min_value=0.0, format="%.2f")
+        estoque = st.number_input("Estoque", min_value=0)
+        publicado = st.checkbox("Publicado?")
+        salvar = st.form_submit_button("Salvar")
+        if salvar:
+            st.success(f"Produto '{nome}' criado!")
+
+elif pagina == "Consultar Produto":
+    produto = st.selectbox("Selecione um produto", produtos)
+    st.write(f"**Produto:** {produto}")
+    st.write("Preço: R$149,90\nEstoque: 27 unidades\nPublicado: Sim")
+
+elif pagina == "Editar Produto":
+    produto = st.selectbox("Editar produto", produtos)
+    with st.form("editar_produto"):
+        nome = st.text_input("Nome do Produto", value=produto)
+        preco = st.number_input("Preço (R$)", value=99.90)
+        estoque = st.slider("Estoque", 0, 100, 25)
+        publicado = st.radio("Publicado?", ["Sim", "Não"])
+        atualizar = st.form_submit_button("Atualizar")
+        if atualizar:
+            st.success(f"'{nome}' atualizado!")
+
+elif pagina == "Excluir Produto":
+    produto = st.selectbox("Produto a excluir", produtos)
+    confirmar = st.button("Excluir")
+    if confirmar:
+        st.error(f"Produto '{produto}' foi excluído.")
 
 st.markdown("---")
-st.caption("© Kipper • Portfólio criado com Streamlit")
+st.caption("🔧 Menu com expander em Streamlit • Estilo colapsável simples")
